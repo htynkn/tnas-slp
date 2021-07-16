@@ -16,9 +16,9 @@ jobs:
       - name: Install Cross tool
         run: cargo install cross
       - name: Build
-        run: cross build --target x86_64-unknown-linux-gnu --release
+        run: cd slp && cross build --target x86_64-unknown-linux-gnu --release
       - name: Copy exec file
-        run: mkdir -p packing/usr/local/slp/ && cp target/x86_64-unknown-linux-gnu/release/slp-server-rust packing/usr/local/slp/ && chmod +x packing/usr/local/slp/*
+        run: mkdir -p packing/usr/local/slp/ && cp slp/target/x86_64-unknown-linux-gnu/release/slp-server-rust packing/usr/local/slp/ && chmod +x packing/usr/local/slp/*
       - uses: htynkn/terra-master-packing-action@master
         name: Terra-Master packing
         with:
@@ -38,9 +38,9 @@ jobs:
       - name: Install Cross tool
         run: cargo install cross
       - name: Build
-        run: cross build --target aarch64-unknown-linux-gnu --release
+        run: cd slp && cross build --target aarch64-unknown-linux-gnu --release
       - name: Copy exec file
-        run: mkdir -p packing/usr/local/slp/ && cp target/aarch64-unknown-linux-gnu/release/slp-server-rust packing/usr/local/slp/ && chmod +x packing/usr/local/slp/*
+        run: mkdir -p packing/usr/local/slp/ && cp slp/target/aarch64-unknown-linux-gnu/release/slp-server-rust packing/usr/local/slp/ && chmod +x packing/usr/local/slp/*
       - uses: htynkn/terra-master-packing-action@master
         name: Terra-Master packing
         with:
