@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  x86:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Install Cross tool
+        run: cargo install cross
+      - name: Build
+        run: cross build --target x86_64-unknown-linux-gnu --release
+      - name: Copy exec file
+        run: mkdir -p packing/usr/local/slp/ && cp target/x86_64-unknown-linux-gnu/release/slp-server-rust packing/usr/local/slp/ && chmod +x packing/usr/local/slp/*
+      - uses: htynkn/terra-master-packing-action@master
+        name: Terra-Master packing
+        with:
+          folder-name: packing/
+          arch: x86_apps
+          tpk-name: slp
+      - uses: actions/upload-artifact@v2
+        with:
+          name: x86_apps
+          path: "*.tpk"
+  amd:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Install Cross tool
+        run: cargo install cross
+      - name: Build
+        run: cross build --target aarch64-unknown-linux-gnu --release
+      - name: Copy exec file
+        run: mkdir -p packing/usr/local/slp/ && cp target/aarch64-unknown-linux-gnu/release/slp-server-rust packing/usr/local/slp/ && chmod +x packing/usr/local/slp/*
+      - uses: htynkn/terra-master-packing-action@master
+        name: Terra-Master packing
+        with:
+          folder-name: packing/
+          arch: amd_apps
+          tpk-name: slp
+      - uses: actions/upload-artifact@v2
+        with:
+          name: amd_apps
+          path: "*.tpk"

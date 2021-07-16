@@ -1,0 +1,12 @@
+[en-us]
+name = "Switch Lan Play Server"
+auth = "htynkn"
+version = "1.0.0"
+descript = "Make you and your friends play games like in a LAN."
+
+[zh-cn]
+name = "Switch Lan Play Server"
+auth = "htynkn"
+version = "1.0.0"
+descript = "和你的朋友愉快的链接"
+
