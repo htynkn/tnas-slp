@@ -1,0 +1,3 @@
+[submodule "slp"]
+	path = slp
+	url = https://github.com/spacemeowx2/slp-server-rust.git
